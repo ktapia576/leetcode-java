@@ -13,33 +13,33 @@ public class PathSum {
       /
      1
 
-visit each node and keep current sum... when traversing back up to root... subtract from current sum
+visit each node in preorder traversal... subtract its current value from target when visiting next node.
 
 
-function(node, targetSum, currentsum)
+function(node, targetSum)
 
-   // if node == null, return false since no path found
+   // if node == null, return false since root node can be empty
 
-   // add current node to current sum
+   // check if no child nodes, indicating its a leaf node. Then check if targetsum equals 0 when subtracting current
+   // node value
 
-   // check if currentsum equals targetsum, if so return true
+    // visit left node and subtract current node value for next traversal check  of target sum
 
-   // keep going left recursion
+    // visit right node doing same as left.. but return an OR of the returns of these two recursive cases.
+    // this means return true if there EXISTS a root to leaf path for target sum.
 
-   // keep going right recusrion
+     */
 
-   // if no left or right child, subtract current from current sum
-
-   // return false since traversed all
-
-/*
-
-
-
-*/
     class Solution {
-        public boolean hasPathSum(TreeNode root, int targetSum) {
+        public boolean hasPathSum(TreeNode node, int targetSum) {
+            if (node == null) { return false; }
 
+            if (node.left == null && node.right == null) {
+                return targetSum - node.val == 0; //Only check if equals targtsum when is leaf node
+            }
+
+            return hasPathSum(node.left, targetSum - node.val) || hasPathSum(node.right, targetSum - node.val);
         }
     }
+
 }
