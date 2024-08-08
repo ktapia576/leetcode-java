@@ -1,7 +1,8 @@
 public class HappyNumber {
     // *************  LEETCODE PROBLEM 202 *******************
 
-    
+    // This solution uses Floyd Cycle detection algorithm and modulus to get individual digits of numbers
+
     class Solution {
         public boolean isHappy(int n) {
             int slow = n;
