@@ -22,12 +22,12 @@ class Solution {
         previouslyVisited.add("0,0");
 
         for(int i = 0; i < path.length(); i++){
-            Character step = path.charAt(i);
+            char step = path.charAt(i);
 
-            if(step.equals('N')) { y += 1; }
-            if(step.equals('S')) { y -= 1; }
-            if(step.equals('E')) { x += 1; }
-            if(step.equals('W')) { x -= 1; }
+            if(step == 'N') { y += 1; }
+            if(step == 'S') { y -= 1; }
+            if(step == 'E') { x += 1; }
+            if(step == 'W') { x -= 1; }
 
             // convert to String
             String xCord = Integer.toString(x);
