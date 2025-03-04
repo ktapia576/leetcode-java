@@ -14,6 +14,14 @@ class Solution {
         HashSet<String> previouslyVisited = new HashSet<>();
         boolean pathsCrossed = false;
 
+        // save moves for better organization and easier maintainability 
+        // in future if additonal moves added, like diagonal
+        HashMap<Character, int[]> moves = new HashMap<>();
+        moves.put('N', new int[]{0, 1});
+        moves.put('S', new int[]{0, -1});
+        moves.put('W', new int[]{-1, 0});
+        moves.put('E', new int[]{1, 0});
+
         // keep track of x and y
         int x = 0;
         int y = 0;
@@ -23,11 +31,10 @@ class Solution {
 
         for(int i = 0; i < path.length(); i++){
             char step = path.charAt(i);
+            int[] move = moves.get(step);
 
-            if(step == 'N') { y += 1; }
-            if(step == 'S') { y -= 1; }
-            if(step == 'E') { x += 1; }
-            if(step == 'W') { x -= 1; }
+            x += move[0];
+            y += move[1];
 
             // convert to String
             String xCord = Integer.toString(x);
