@@ -12,18 +12,19 @@
 
 class Solution {
     public int[] finalPrices(int[] prices) {
-        int[] result = prices.clone();
+        // no need to clone prices array, since can change indices on the same array. 
+        // (Only previous iterated indices change anyway not future)
 
         // stack to keep track of indices of previously iterate items
         Stack<Integer> previousItemIndices = new Stack<>();
 
         for(int i = 0; i < prices.length; i++){
             while(!previousItemIndices.isEmpty() && prices[(previousItemIndices.peek())] >= prices[i]){
-                result[previousItemIndices.pop()] -= prices[i];
+                prices[previousItemIndices.pop()] -= prices[i];
             }
             previousItemIndices.add(i);
         }
 
-        return result;
+        return prices;
     }
 }
