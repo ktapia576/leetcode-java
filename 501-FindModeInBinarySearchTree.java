@@ -93,3 +93,20 @@ class Solution {
             if(node.right != null) { stack.push(node.right); }           
         }
 */
+
+// BFS Approach that can replace iterative approach
+
+/*
+        Queue<TreeNode> queue = new LinkedList<>();
+
+        queue.add(root);
+
+        while(!queue.isEmpty()){
+            TreeNode node = queue.poll();
+
+            map.put(node.val, map.getOrDefault(node.val, 0) + 1);
+
+            if(node.left != null) { queue.add(node.left); }   
+            if(node.right != null) { queue.add(node.right); }           
+        }
+*/
