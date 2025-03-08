@@ -76,3 +76,20 @@ class Solution {
         traverse(node.right, map);        
     }
 }
+
+
+// Iterative Approach that can replace recursion by implementing own stack
+
+/*
+       Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+
+        while(!stack.empty()){
+            TreeNode node = stack.pop();
+
+            map.put(node.val, map.getOrDefault(node.val, 0) + 1);
+
+            if(node.left != null) { stack.push(node.left); }   
+            if(node.right != null) { stack.push(node.right); }           
+        }
+*/
