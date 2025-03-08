@@ -27,6 +27,12 @@
  // once done traversing, iterate through map and check for all modes that
  // eqaul max frequency and update array
 
+
+// This is one approach to solution vs an approach that has O(1) memory
+
+// Time Complexities of this algo
+// Time O(n)
+// Space O(n)
 class Solution {
     public int[] findMode(TreeNode root) {
         HashMap<Integer, Integer> map = new HashMap<>();
