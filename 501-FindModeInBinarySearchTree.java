@@ -110,3 +110,54 @@ class Solution {
             if(node.right != null) { queue.add(node.right); }           
         }
 */
+
+// Recusrion with no hashmap approach
+
+/*
+class Solution {
+    public int[] findMode(TreeNode root) {
+        ArrayList<Integer> values = new ArrayList<>();
+
+        traverse(root, values);
+
+        // find MaxFrequency , default the values to first node.val stored since nodes in range of 1 - 10^4
+        int maxFreq = 0;
+        int currStreak = 0;
+        int currNum = 0;
+        ArrayList<Integer> result = new ArrayList<>();
+        for(int num : values) {
+            if(num == currNum){
+                currStreak++;
+            } else {
+                currStreak = 1;
+                currNum = num;
+            }
+
+            if(currStreak > maxFreq){
+                result = new ArrayList();
+                maxFreq = currStreak;
+            }
+
+            if (currStreak == maxFreq) { result.add(num); }
+        }
+
+        int[] list = new int[result.size()];
+
+        for(int i = 0; i < list.length; i++){
+            list[i] = result.get(i);
+        }
+
+        return list;
+    }
+
+    public static void traverse(TreeNode node, ArrayList<Integer> values){
+        if (node == null){ return; }
+
+        traverse(node.left, values);
+
+        values.add(node.val);
+
+        traverse(node.right, values);
+    }   
+}
+*/
