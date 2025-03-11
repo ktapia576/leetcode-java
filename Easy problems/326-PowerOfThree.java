@@ -10,7 +10,7 @@
 // This solution can be solved iteratively with while loop O(n)
 // which is slow but accurate
 // this is by dividing n by 3 until not divisible anymore
-// if the result of the dividing returns 0... that means it was a power of three
+// if the result of the dividing returns 1... that means it was a power of three
 //------------------------------------------------------------------------------
 // It can also be solved by taking the maximum power of three allowed to be stored in an int
 // then taking modulo of any n that is greater than 0
@@ -27,3 +27,14 @@ class Solution {
         return n > 0 && 1162261467 % n == 0;
     }
 }
+
+/* ITERATIVE SOLUTION: O(n) Time
+
+public boolean isPowerOfThree(int n) {
+    if (n <= 0) return false;
+    while (n % 3 == 0) {
+        n /= 3;
+    }
+    return n == 1;
+}
+/*
