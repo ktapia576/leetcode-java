@@ -49,9 +49,10 @@ class Solution {
                 if(uniqueCandy > allowedCandy){ break; }
             }
         }
-
-        if(allowedCandy >= uniqueCandy) { return uniqueCandy; }
-        else { return allowedCandy; } 
+        // if unique candy is smaller that means reutrn that since Alice cant have more candy
+        // even if she wanted to... return allowed candy if unique candy is larger since
+        // Alice cant have more candy than allowed anyway
+        return Math.min(allowedCandy, uniqueCandy); 
     }
 }
 
