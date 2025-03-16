@@ -38,3 +38,30 @@ class Solution {
         return false;
     }
 }
+
+/* Dynamic Programming Apporach Bottom up DP table
+
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        boolean[][] dp = new boolean[s.length() + 1][t.length() + 1];
+
+        //base case: true for when s = "" and t >= 0
+        for(int i = 0; i <= t.length(); i++){
+            dp[0][i] = true;
+        }
+
+        for(int i = 1; i <= s.length(); i++){
+            for(int j = 1; j <= t.length(); j++){
+                if(s.charAt(i-1) == t.charAt(j-1)){
+                    dp[i][j] = dp[i-1][j-1]; // look to see if previous was true to maintain order
+                } else {
+                    dp[i][j] = dp[i][j-1]; // carry previous column
+                }
+            }
+        }
+
+        return dp[s.length()][t.length()];
+    }
+}
+
+*/
