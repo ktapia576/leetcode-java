@@ -84,3 +84,29 @@ a
         return arr[arr.length-1];
     }
 }
+
+/* WITHOUT ARRAY SOLUTION */
+
+public class Fibonacci {
+    public static void main(String[] args) {
+        System.out.println("fib n: " + fib(12)); // fib(12) = 144 this is Zero based indexing... not like the two above
+    }
+
+    // Tabulation solution... O(n) time O(n) space
+    // Can even reduce space to O(1) by using two variables instead of array
+    public static long fib(int n){
+        if(n <= 1){ return n; }
+
+        int prev2 = 0;  // fib(i-2)
+        int prev1 = 1; // fib(i-1)
+
+        for(int i = 2; i <= n; i++){
+            int curr = prev1 + prev2;
+            prev2 = prev1;
+            prev1 = curr;
+
+        }
+
+        return prev1;
+    }
+}
