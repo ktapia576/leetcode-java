@@ -62,3 +62,25 @@ public class Main {
         return result;
     }
 }
+
+/* TABULATION APPROACH BELOW: */
+
+public class Fibonacci {
+    public static void main(String[] args) {
+        System.out.println("fib n: " + fib(13)); // n=13 is 144
+    }
+
+    // Tabulation solution... O(n) time O(n) space
+    // Can even reduce space to O(1) by using two variables instead of array
+    public static long fib(int n){
+        int[] arr = new int[n];
+        arr[0] = 0;
+        arr[1] = 1;
+
+        for(int i = 2; i < arr.length; i++){
+            arr[i] = arr[i-1] + arr[i-2];
+        }
+a
+        return arr[arr.length-1];
+    }
+}
