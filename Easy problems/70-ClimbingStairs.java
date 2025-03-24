@@ -74,7 +74,7 @@ class Solution {
             return memo.get(n);
         }
 
-        int result = climbStairs(n-2) + climbStairs(n-1); 
+        int result = countSteps(n-2, memo) + countSteps(n-1, memo); 
         memo.put(n, result);
         return result;
     }
