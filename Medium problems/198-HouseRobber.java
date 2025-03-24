@@ -80,20 +80,23 @@ class Solution {
 
 /* TABULATION APPROACH */
 
+
 class Solution {
     public int rob(int[] nums) {
-        if(nums.length == 0){ return 0;}
+        if(nums.length == 0){ return 0; }
         if(nums.length == 1){ return nums[0]; }
         if(nums.length == 2){ return Math.max(nums[0], nums[1]); }
 
-        int[] arr = new int[nums.length];
-        arr[0] = nums[0];
-        arr[1] = Math.max(nums[0], nums[1]);
+        int maxLootOfPrev2Houses = nums[0];
+        int maxLootOfPrevHouse = Math.max(nums[0], nums[1]);
+        int currLoot = 0;
         
-        for(int i = 2; i < arr.length; i++){
-            arr[i] = Math.max(arr[i-2] + nums[i], arr[i-1]);
+        for(int i = 2; i < nums.length; i++){
+            currLoot = Math.max(maxLootOfPrev2Houses + nums[i], maxLootOfPrevHouse);
+            maxLootOfPrev2Houses = maxLootOfPrevHouse;
+            maxLootOfPrevHouse = currLoot;
         }
 
-        return arr[nums.length-1];
+        return currLoot;
     }
 }
