@@ -53,10 +53,10 @@
 class Solution {
     public int rob(int[] nums) {
         HashMap<Integer, Integer> memo = new HashMap<>();
-        return breakInHouse(nums, 0, 0, memo);
+        return breakInHouse(nums, 0, memo);
     }
 
-    public int breakInHouse(int[] nums, int index, int loot, HashMap<Integer, Integer> memo) {
+    public int breakInHouse(int[] nums, int index, HashMap<Integer, Integer> memo) {
         if(index >= nums.length){ return 0;}
         
         if(memo.containsKey(index)){
@@ -64,16 +64,16 @@ class Solution {
         }
 
         // no steal first
-        int noStealLoot = breakInHouse(nums, index+1, loot, memo);
+        int noStealLoot = breakInHouse(nums, index+1, memo);
 
         // now steal current house
-        int currLoot = nums[index];
-        int stealLoot = breakInHouse(nums, index+2, currLoot, memo);
+        int currHouseLoot = nums[index];
+        int stealLoot = breakInHouse(nums, index+2, memo);
 
-        int result = Math.max(noStealLoot, currLoot + stealLoot);
+        int maxLoot = Math.max(noStealLoot, currHouseLoot + stealLoot);
 
-        memo.put(index, result);
+        memo.put(index, maxLoot);
 
-        return result;
+        return maxLoot;
     }
 }
