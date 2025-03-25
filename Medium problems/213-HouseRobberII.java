@@ -36,7 +36,7 @@ output = 14
 
 class Solution {
     public int rob(int[] nums) {
-        HashMap<Integer, Integer> memo = new HashMap<>();
+        HashMap<String, Integer> memo = new HashMap<>();
         return breakInHouse(nums, 0, false, memo);
     }
 
@@ -44,20 +44,22 @@ class Solution {
         if(index >= nums.length) { return 0;}
         if(index == nums.length-1 && firstHouseStolen) { return 0;}
         
-        if(memo.containsKey(index)) { return memo.get(index); }
+        String key = index + "_" + firstHouseStolen;
+
+        if(memo.containsKey(key)) { return memo.get(key); }
 
         // no steal
         int skipMaxLoot = breakInHouse(nums, index+1, firstHouseStolen, memo);
 
         // steal
         int currLoot = nums[index];
-        if(index == 0) { firstHouseStolen = true; }
+        boolean updateFirstHouseStolen = (index == 0) ? true : firstHouseStolen;
 
-        int robMaxLoot = breakInHouse(nums, index+2, firstHouseStolen, memo);
+        int robMaxLoot = breakInHouse(nums, index+2, updateFirstHouseStolen, memo);
 
         int maxLoot = Math.max(skipMaxLoot, currLoot + robMaxLoot);
 
-        memo.put(index, maxLoot);
+        memo.put(key, maxLoot);
 
         return maxLoot;
     }
