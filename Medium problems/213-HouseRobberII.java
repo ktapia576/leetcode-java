@@ -94,3 +94,57 @@ class Solution {
         return Math.max(robFirstHouseTabulation[nums.length-2],skipFirstHouseTabulation[nums.length-1]);
     }
 }
+
+
+// Correct Tabulation approach with array O(n) time
+
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length == 1) { return nums[0];} 
+        if(nums.length == 2) { return Math.max(nums[0], nums[1]);}
+
+        return Math.max(robRange(nums, 0, nums.length - 2), robRange(nums, 1, nums.length - 1));
+    }
+
+    public int robRange(int[] nums, int start, int end){
+        int len = end - start + 1; // get length of subarray, inclusive, hence +1
+        int[] arr = new int[len];
+        
+        arr[0] = nums[start];
+        arr[1] = Math.max(nums[start], nums[start+1]);
+
+        for(int i = 2; i < len; i++) {
+            arr[i] = Math.max(arr[i-2]+nums[start+i], arr[i-1]);
+        }
+
+        return arr[arr.length-1];
+    }
+}
+
+
+
+// Tabulation with O(1) space
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length == 1) { return nums[0];} 
+        if(nums.length == 2) { return Math.max(nums[0], nums[1]);}
+
+        return Math.max(robRange(nums, 0, nums.length - 2), robRange(nums, 1, nums.length - 1));
+    }
+
+    public int robRange(int[] nums, int start, int end){
+        int len = end - start + 1; // get length of subarray, inclusive, hence +1
+        int[] arr = new int[len];
+        
+        int prev2 = nums[start];
+        int prev1 = Math.max(nums[start], nums[start+1]);
+
+        for(int i = 2; i < len; i++) {
+            int currLoot = Math.max(prev2 + nums[start+i], prev1);
+            prev2 = prev1;
+            prev1 = currLoot;
+        }
+
+        return prev1;
+    }
+}
