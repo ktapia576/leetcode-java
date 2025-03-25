@@ -93,3 +93,4 @@ class Solution {
 
         return Math.max(robFirstHouseTabulation[nums.length-2],skipFirstHouseTabulation[nums.length-1]);
     }
+}
