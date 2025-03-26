@@ -52,3 +52,37 @@ class Solution {
         return pascalValue(row-1, col-1) + pascalValue(row-1, col);
     }
 }
+
+// RECURSION WITH MEMO
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> triangle = new ArrayList<>();
+        HashMap<String, Integer> memo = new HashMap<>();
+
+        for(int rowNum = 0; rowNum < numRows; rowNum++){
+            List<Integer> row = new ArrayList<>();
+            for(int col = 0; col <= rowNum; col++){
+                row.add(pascalValue(rowNum, col, memo));
+            }
+            triangle.add(row);
+        }
+
+        return triangle;
+    }
+
+    public int pascalValue(int row, int col, HashMap<String, Integer> memo){
+        if(col == 0 || col == row) { return 1; }
+
+        String key = row + "," + col;
+
+        if(memo.containsKey(key)) {
+            return memo.get(key);
+        }
+
+        int result = pascalValue(row-1, col-1, memo) + pascalValue(row-1, col, memo);
+
+        memo.put(key, result);
+
+        return result;
+    }
+}
