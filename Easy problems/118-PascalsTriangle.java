@@ -86,3 +86,29 @@ class Solution {
         return result;
     }
 }
+
+// DP solution with DP TABLE no recursion
+
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> triangle = new ArrayList<>();
+
+        for(int rowNum = 0; rowNum < numRows; rowNum++){
+            List<Integer> row = new ArrayList<>();
+            for(int col = 0; col <= rowNum; col++){
+                //base cases
+                if(col == 0 || col == rowNum) {
+                    row.add(1);
+                } else {
+                    List<Integer> prevRow = triangle.get(rowNum-1);
+                    int left = prevRow.get(col-1);
+                    int right = prevRow.get(col);
+
+                    row.add(left + right);
+                }
+            }
+            triangle.add(row);
+        }
+        return triangle;
+    }
+}
