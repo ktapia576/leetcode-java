@@ -57,7 +57,9 @@ class Solution {
         }
 
         if(leastValue < 1) {
-            return Math.abs(leastValue) + 1;
+            // if 1 - (-4) = 5, reduces having to use Math.abs function call. increases speed
+            // microscopally but its better.
+             return 1 - leastValue; 
         } else {
             return 1;
         }
