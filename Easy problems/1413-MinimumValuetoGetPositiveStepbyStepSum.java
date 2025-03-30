@@ -39,3 +39,27 @@ class Solution {
 
 // after first submit, instead of sorting which may take O(n log n) or O(n^2) just iterate O(n) and get least Value
 // sorting is overkill when just looking for a minimum
+
+// This is a one pass solution without needing a prefix array since its not needed in return result
+// you can calculate prefixSum in one variable and look for minimum step value same time.
+// O(n) time
+// O(1) space
+
+class Solution {
+    public int minStartValue(int[] nums) {
+        int prefixSum = 0;
+        int leastValue = Integer.MAX_VALUE;
+
+        // calculate prefix and store the min prefix same time
+        for(int i = 0; i < nums.length; i++){
+            prefixSum = prefixSum + nums[i];
+            if(prefixSum < leastValue) { leastValue = prefixSum; }
+        }
+
+        if(leastValue < 1) {
+            return Math.abs(leastValue) + 1;
+        } else {
+            return 1;
+        }
+    }
+}
