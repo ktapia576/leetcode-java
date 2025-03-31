@@ -56,3 +56,26 @@ class Solution {
         }
     }
 }
+
+// Starting from left to right since finding leftmost pivot index
+// Using math to calculate what the left array total equals and th right array total equals
+// then just comparing whether both sums on both sides equals the same. (not including pivot index, nums[i])
+
+
+class Solution {
+    public int pivotIndex(int[] nums) {
+        int totalSum = 0;
+
+        for(int i = 0; i < nums.length; i++){
+            totalSum += nums[i];
+        }
+        
+        int leftSum = 0;
+        for(int i=0; i < nums.length; i++){
+            if(leftSum == totalSum - leftSum - nums[i]) { return i; }
+            leftSum += nums[i];
+        }
+
+        return -1;
+    }
+}
