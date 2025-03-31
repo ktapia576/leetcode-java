@@ -61,6 +61,29 @@ class Solution {
 // Using math to calculate what the left array total equals and th right array total equals
 // then just comparing whether both sums on both sides equals the same. (not including pivot index, nums[i])
 
+/*
+[1,7,3,6,5,6] output =3
+
+at i=2, leftSum = 8, totalSum = 28, nums[i] = 3
+
+so we check: 8 == 28 - 8 - 3
+
+which visualy looks like:
+
+does [1,7] == [6,5,6] ? mathmatecially, NO (8==17 NOT TRUE)
+
+NOTE: Pivot index element was NOT included either with calculation
+------------------------------------------------
+
+at i=3, leftSum=11, totalSum=28, nums[i] = 6
+
+so we check: 11 == 28-11-6
+
+which visually looks like:
+
+does [1,7,3] == [5,6] ? YES  (11==11 TRUE)
+
+*/
 
 class Solution {
     public int pivotIndex(int[] nums) {
