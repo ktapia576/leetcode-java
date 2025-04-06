@@ -49,6 +49,24 @@ class Solution {
     }
 }
 
+// tabulation with space optimization
+
+class Solution {
+    public int minCostClimbingStairs(int[] cost) {
+        int prevPrev = cost[0];
+        int prev= cost[1];
+
+        for(int i = 2; i < cost.length; i++) {
+            int curr = cost[i] + Math.min(prevPrev, prev);
+            prevPrev = prev;
+            prev = curr;
+        }
+
+        return Math.min(prevPrev,prev);
+    }
+}
+
+
 // MEMO RECURSION SOLUTION
 
 class Solution {
