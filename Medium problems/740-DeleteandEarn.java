@@ -86,3 +86,67 @@ class Solution {
         return result;
     }
 }
+
+// TABULATION APPROACH
+class Solution {
+    public int deleteAndEarn(int[] nums) {
+        // find maxVal for array creation
+        int maxVal = 0; 
+        for(int i = 0; i < nums.length; i++){
+            if(maxVal < nums[i]) { maxVal = nums[i]; }
+        }
+
+        // create frequency array that will have each index == nums[i].
+        int[] points = new int[maxVal+1];
+        
+        // populate array with the correct values and frequencies
+        for(int num : nums){
+            points[num] += num;
+        }
+
+        int[] dp = new int[points.length];
+        dp[0] = points[0];
+        dp[1] = Math.max(points[0], points[1]);
+
+        for(int i = 2; i < dp.length; i++){
+            dp[i] = Math.max(dp[i-2]+points[i], dp[i-1]);
+        }
+
+        return dp[dp.length-1];
+    }
+}
+
+// Space Optimized tabulation
+// Time O(n)
+// Space O(n) points array
+class Solution {
+    public int deleteAndEarn(int[] nums) {
+        if (nums.length == 0) { return 0; }
+        if (nums.length == 1) { return nums[0]; }
+
+        // find maxVal for array creation
+        int maxVal = 0; 
+        for(int i = 0; i < nums.length; i++){
+            if(maxVal < nums[i]) { maxVal = nums[i]; }
+        }
+
+        // create frequency array that will have each index == nums[i].
+        int[] points = new int[maxVal+1];
+        
+        // populate array with the correct values and frequencies
+        for(int num : nums){
+            points[num] += num;
+        }
+
+        int prevPrev= points[0];
+        int prev = Math.max(points[0], points[1]);
+
+        for(int i = 2; i < points.length; i++){
+            int curr = Math.max(prevPrev + points[i], prev);
+            prevPrev = prev;
+            prev = curr;
+        }
+
+        return prev; // return previous because sometimes for loop never runs and curr might not update
+    }
+}
