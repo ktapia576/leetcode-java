@@ -76,6 +76,20 @@ class Solution {
     }
 }
 
+// Reattempt when reviewing code: More concise and better imo
+class Solution {
+    public int minimumOperations(int[] nums) {
+        Set<Integer> seen = new HashSet<>();
+        
+        for(int i = nums.length-1; i >= 0; i--){
+            if(seen.contains(nums[i])) { return i/3 + 1; }
+            seen.add(nums[i]);
+        }
+
+        return 0;
+    }
+}
+
 // Further optimized solution but using boolean array and ASSUMING nums[i] < 100
 
 class Solution {
