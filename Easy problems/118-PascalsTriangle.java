@@ -112,3 +112,37 @@ class Solution {
         return triangle;
     }
 }
+
+// Recursion and Memo but with slightly better memo optimization... 2D arry vs HashMap
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> triangle = new ArrayList<List<Integer>>();
+        int[][] memo = new int[numRows][numRows]; // 0 == unset
+        
+        for(int row = 0; row < numRows; row++){
+            List<Integer> wholeRow = new ArrayList<Integer>();
+            for(int col = 0; col <= row; col++){
+                int num = pascals(row, col, memo);
+                wholeRow.add(num);
+            }
+            triangle.add(wholeRow);
+        }
+
+        return triangle;
+    }
+
+    public int pascals(int row, int col, int[][] memo){
+        if (col < 0 || col > row) return 0;      // guard
+        if(row == col) { return 1;}
+        if(col == 0) { return 1;}
+
+        if(memo[row][col] != 0) { 
+            return memo[row][col];
+        }
+        
+        int result = pascals(row-1, col-1, memo) + pascals(row-1, col, memo);
+        memo[row][col] = result; 
+
+        return result;
+    }
+}
