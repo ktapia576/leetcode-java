@@ -68,3 +68,31 @@ class Solution {
         return arr;
     }
 }
+
+// New Optimized solution from 8/27/25
+// This is better since it does not use ArrayList while accessing etc
+// Also better since it is removes logic branching in general as well vs older solution above.
+// actually came out faster in leetcode too
+
+// Same concept in using old data and updating right --> left
+// just always starts at end of each row
+class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        int[] row = new int[rowIndex+1];
+        row[0] = 1;
+
+        for(int rowNum = 1; rowNum <= rowIndex; rowNum++){
+            for(int col = rowNum; col >= 1; col--) {
+                int prev = row[col-1];
+                int curr = row[col];
+
+                row[col] = prev + curr;
+            }
+        }
+
+        List<Integer> result = new ArrayList<>();
+        for(int num : row) { result.add(num);}
+
+        return result;
+    }
+}   
