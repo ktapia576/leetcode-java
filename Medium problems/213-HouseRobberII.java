@@ -65,6 +65,49 @@ class Solution {
     }
 }
 
+// SECOND ATTEMPT WITH A NEW KEY GENERATION STRATEGY, USING BITWISE SHIFT TO LEFT ONCE FOR FIRSTHOUSE
+// NOT ROBBED SEQUENCE, AND UNIQUE KEY FOR FIRSTHOUSE IS ROBBED SEQUENCE.
+
+class Solution {
+    public int rob(int[] nums) {
+        Map<Integer, Integer> memo = new HashMap<>();
+
+        return helper(0, false, nums, memo);
+    }
+
+    public int helper(int houseIndex, boolean firstHouseStolen, int[] nums, Map<Integer, Integer> memo){
+        if(houseIndex >= nums.length) {return 0;}
+        if(firstHouseStolen && houseIndex == nums.length-1) {return 0;}
+
+        //String key = houseIndex + "," + firstHouseStolen;
+
+        // bitwise shift once to left to "make space" and then use an OR to add 1 or 0 to the flag 
+        // bit if firsthouse robbed or not. faster than using Strings
+
+        // maps to: (false, true) in relation to first house robbed
+        // index 0 : (0,1)
+        // index 1 : (2,3)
+        // index 2 : (4,5)
+        // index 3 : (6,7)
+
+        int key = (houseIndex << 1) | (firstHouseStolen ? 0 : 1);
+
+        if(memo.containsKey(key)){ return memo.get(key);}
+
+        int currentHouse = nums[houseIndex];
+
+        int skip = helper(houseIndex + 1, firstHouseStolen, nums, memo);
+
+        boolean updateFirstHouseStolen = houseIndex == 0 || firstHouseStolen;
+        int rob = helper(houseIndex + 2, updateFirstHouseStolen, nums, memo);
+
+        int result = Math.max(skip, rob + currentHouse);
+        memo.put(key, result);
+
+        return result;
+    }
+}
+
 // MY FIRST ATTEMPT AT TABULATION
 
 class Solution {
