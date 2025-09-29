@@ -191,3 +191,45 @@ class Solution {
         return prev1;
     }
 }
+
+
+// 2D TABULATION THAT IS OVERKILL BUT COOL TO UNDERSTAND
+
+// Below is the 2D approach to the solution. This makes the run O(n) vs O(2n) for non 2D solution. which still is O(n) for both solutions but gets rid of double linear pass vs 1D tabulation. 2D keeps track of two states: 
+
+// dp[i][] keeps track of the house index.
+
+// dp[i][f] keeps track of the parallel state, in a set f  —> {0,1}. 0 column = first house not taken, 1 column = first house taken,
+
+// MAKE SURE TO SET THE BASES CASES CORRECTLY FOR EACH STATE/PARRALEL UNIVERSE
+
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length == 1) { return nums[0]; }
+        if(nums.length == 2) { return Math.max(nums[0], nums[1]);}
+
+        int[][] dp = new int[nums.length][2];
+        
+        // base cases for first house
+        dp[0][0] = 0; // dont take first house
+        dp[0][1] = nums[0]; // take first house
+
+        // base cases for second house
+        dp[1][0] = nums[1];
+        dp[1][1] = nums[0];
+
+        for(int i = 2; i < nums.length; i++){
+            int currentHouse = nums[i];
+            dp[i][0] = Math.max(dp[i-1][0], currentHouse + dp[i-2][0]);
+
+            // f=1: if at last house, only skip is allowed
+            if (i == nums.length - 1) {
+                dp[i][1] = dp[i - 1][1];
+            } else {
+                dp[i][1] = Math.max(dp[i - 1][1], dp[i - 2][1] + nums[i]);
+            }
+        }
+
+        return Math.max(dp[nums.length-1][0], dp[nums.length-1][1]);
+    }
+}
